@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="row">
+    <div class="col-7">
+        <select class="form-control" id="albums">
+        </select>
+    </div>
+    <div class="col-5">
+        <button class="btn btn-outline-primary" id="btn-search-photos">
+            Visualizar Álbum
+        </button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <table >
+            <tbody id="tabla-img">
+
+            </tbody>
+        </table>
+        <div class="col-12" id="comments">
+            
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        $.ajax({
+            url: "https://localhost:44390/api/Albums",
+            contentType: 'json',
+            success: function (response) {
+                $("#albums").empty();
+                $("#albums").append("<option>Seleccionar</option>");
+                $.each(response, function (i, val) {
+                    $("#albums").append("<option value=" + val.id + ">" + val.title + "</option>");
+                });
+            }
+        })
+    })
+</script>
